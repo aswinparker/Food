@@ -1,100 +1,181 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Food Delivery</title>
+<title>Crypto Dashboard</title>
 
 <style>
-body{
+*{
     margin:0;
-    background:#f2f2f2;
+    padding:0;
+    box-sizing:border-box;
     font-family:Arial,sans-serif;
-    text-align:center;
+}
+
+body{
+    background:#1ec7be;
 }
 
 .header{
     display:flex;
-    justify-content:center;
     align-items:center;
-    margin-top:30px;
-    gap:15px;
+    padding:20px;
+    color:white;
 }
 
-.search-box{
-    width:70%;
-    max-width:500px;
-    background:#e6e6e6;
-    border-radius:10px;
+.logo{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#0a2b40;
+}
+
+.title{
+    font-size:38px;
+    font-weight:bold;
+    margin-left:15px;
+}
+
+.notice{
+    margin:15px;
     padding:15px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    border:2px solid rgba(255,255,255,.5);
+    border-radius:30px;
+    color:white;
+    overflow:hidden;
 }
 
-.search-box input{
-    border:none;
-    background:transparent;
-    font-size:20px;
+.banner{
+    margin:15px;
+}
+
+.banner img{
     width:100%;
-    outline:none;
+    border-radius:20px;
 }
 
-.cart{
-    font-size:50px;
-    color:orange;
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    padding:15px;
 }
 
-.shop{
-    margin-top:80px;
+.card{
+    background:rgba(255,255,255,.15);
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+    color:white;
+    backdrop-filter:blur(5px);
 }
 
-.shop img{
-    width:250px;
+.card img{
+    width:60px;
+    margin-bottom:10px;
 }
 
-.cash{
-    margin-top:30px;
-    font-size:60px;
-    font-weight:bold;
-    color:#0a1f5c;
-    text-shadow:
-        4px 4px 0 orange,
-       -4px -4px 0 yellow,
-        4px -4px 0 yellow,
-       -4px 4px 0 yellow;
+.card h3{
+    font-size:18px;
 }
 
-.delivery{
-    font-size:70px;
-    font-weight:bold;
-    color:orange;
-    text-shadow:
-        4px 4px 0 #0a1f5c,
-       -4px -4px 0 #0a1f5c,
-        4px -4px 0 #0a1f5c,
-       -4px 4px 0 #0a1f5c;
+.app-banner{
+    margin:15px;
+    background:linear-gradient(90deg,#1a6fff,#67d9ff);
+    border-radius:20px;
+    padding:25px;
+    text-align:center;
+    color:white;
+    font-size:32px;
+}
+
+.activities{
+    margin:15px;
+    background:white;
+    border-radius:20px;
+    min-height:150px;
+    padding:20px;
+}
+
+.activities h2{
+    color:black;
+}
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#19bdb4;
+    display:flex;
+    justify-content:space-around;
+    padding:15px 0;
+    color:white;
+}
+
+.bottom-nav div{
+    text-align:center;
 }
 </style>
 </head>
-
 <body>
 
 <div class="header">
-    <div class="search-box">
-        <input type="text" placeholder="Search">
-        🔍
+    <div class="logo"></div>
+    <div class="title">ETH</div>
+</div>
+
+<div class="notice">
+    Mining address: https://example.com
+</div>
+
+<div class="banner">
+    <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?w=1200" alt="">
+</div>
+
+<div class="menu-grid">
+
+    <div class="card">
+        <h3>Recharge</h3>
     </div>
-    <div class="cart">🛒</div>
+
+    <div class="card">
+        <h3>Withdraw</h3>
+    </div>
+
+    <div class="card">
+        <h3>Company Profile</h3>
+    </div>
+
+    <div class="card">
+        <h3>Invite Friends</h3>
+    </div>
+
+    <div class="card">
+        <h3>Agency</h3>
+    </div>
+
+    <div class="card">
+        <h3>Support</h3>
+    </div>
+
 </div>
 
-<div class="shop">
-    <img src="https://cdn-icons-png.flaticon.com/512/5787/5787016.png" alt="Cafe">
+<div class="app-banner">
+    APP
 </div>
 
-<div class="cash">CASH</div>
-<div style="font-size:40px;font-weight:bold;color:#0a1f5c;">on</div>
-<div class="delivery">DELIVERY</div>
+<div class="activities">
+    <h2>Activities</h2>
+</div>
+
+<div class="bottom-nav">
+    <div>🏠<br>Home</div>
+    <div>📊<br>Project</div>
+    <div>👥<br>Team</div>
+    <div>👤<br>Me</div>
+</div>
 
 </body>
 </html>

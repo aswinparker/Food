@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGR AI Workforce Suite - Workers</title>
+
+<style>
+:root{
+--blue:#0b2545;
+--gold:#d4af37;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f4f6f9;
+}
+
+header{
+background:var(--blue);
+color:white;
+padding:20px;
+text-align:center;
+}
+
+header h1{
+margin:0;
+color:var(--gold);
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.1);
+margin-bottom:20px;
+}
+
+input,select{
+width:100%;
+padding:10px;
+margin:6px 0;
+border:1px solid #ccc;
+border-radius:6px;
+box-sizing:border-box;
+}
+
+button{
+background:var(--blue);
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:6px;
+cursor:pointer;
+margin:5px 0;
+}
+
+button:hover{
+opacity:.9;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:10px;
+text-align:left;
+}
+
+th{
+background:var(--blue);
+color:white;
+}
+
+.search{
+margin-bottom:15px;
+}
+
+.dashboard{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+}
+
+.stat{
+background:white;
+padding:20px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.stat h2{
+margin:0;
+color:var(--gold);
+}
+
+footer{
+background:var(--blue);
+color:white;
+text-align:center;
+padding:15px;
+margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>AGR AI Workforce Suite</h1>
+<p>Worker Master Database</p>
+</header>
+
+<div class="container">
+
+<div class="dashboard">
+
+<div class="stat">
+<h2 id="workerCount">0</h2>
+<p>Total Workers</p>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Add Worker</h2>
+
+<input id="workerId" placeholder="Worker ID">
+
+<input id="workerName" placeholder="Worker Name">
+
+<select id="workerCategory">
+<option>Mason</option>
+<option>Helper</option>
+<option>Fitter</option>
+<option>Welder</option>
+<option>Electrician</option>
+<option>Carpenter</option>
+<option>Operator</option>
+<option>Supervisor</option>
+</select>
+
+<input id="workerMobile" placeholder="Mobile Number">
+
+<input id="workerWage" type="number" placeholder="Daily Wage">
+
+<button onclick="saveWorker()">
+Save Worker
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Search Worker</h2>
+
+<input
+class="search"
+id="searchBox"
+placeholder="Search by Name">
+
+<button onclick="searchWorker()">
+Search
+</button>
+
+<button onclick="loadWorkers()">
+Show All
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Worker List</h2>
+
+<table id="workerTable">
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Category</th>
+<th>Mobile</th>
+<th>Wage</th>
+<th>Delete</th>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+<footer>
+AGR & CO AI Construction Solutions
+</footer>
+
+<script>
+
+function saveWorker(){
+
+let workers =
+JSON.parse(
+localStorage.getItem("workers")
+) || [];
+
+workers.push({
+
+id: workerId.value,
+name: workerName.value,
+category: workerCategory.value,
+mobile: workerMobile.value,
+wage: workerWage.value
+
+});
+
+localStorage.setItem(
+"workers",
+JSON.stringify(workers)
+);
+
+clearForm();
+loadWorkers();
+
+alert("Worker Saved");
+
+}
+
+function loadWorkers(){
+
+let workers =
+JSON.parse(
+localStorage.getItem("workers")
+) || [];
+
+let html = `
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Category</th>
+<th>Mobile</th>
+<th>Wage</th>
+<th>Delete</th>
+</tr>
+`;
+
+workers.forEach((worker,index)=>{
+
+html += `
+<tr>
+
+<td>${worker.id}</td>
+
+<td>${worker.name}</td>
+
+<td>${worker.category}</td>
+
+<td>${worker.mobile}</td>
+
+<td>₹${worker.wage}</td>
+
+<td>
+<button onclick="deleteWorker(${index})">
+Delete
+</button>
+</td>
+
+</tr>
+`;
+
+});
+
+document.getElementById(
+"workerTable"
+).innerHTML = html;
+
+document.getElementById(
+"workerCount"
+).innerText = workers.length;
+
+}
+
+function deleteWorker(index){
+
+let workers =
+JSON.parse(
+localStorage.getItem("workers")
+) || [];
+
+workers.splice(index,1);
+
+localStorage.setItem(
+"workers",
+JSON.stringify(workers)
+);
+
+loadWorkers();
+
+}
+
+function searchWorker(){
+
+let keyword =
+document.getElementById(
+"searchBox"
+).value.toLowerCase();
+
+let workers =
+JSON.parse(
+localStorage.getItem("workers")
+) || [];
+
+let html = `
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Category</th>
+<th>Mobile</th>
+<th>Wage</th>
+<th>Delete</th>
+</tr>
+`;
+
+workers.forEach((worker,index)=>{
+
+if(
+worker.name.toLowerCase()
+.includes(keyword)
+){
+
+html += `
+<tr>
+
+<td>${worker.id}</td>
+
+<td>${worker.name}</td>
+
+<td>${worker.category}</td>
+
+<td>${worker.mobile}</td>
+
+<td>₹${worker.wage}</td>
+
+<td>
+<button onclick="deleteWorker(${index})">
+Delete
+</button>
+</td>
+
+</tr>
+`;
+
+}
+
+});
+
+document.getElementById(
+"workerTable"
+).innerHTML = html;
+
+}
+
+function clearForm(){
+
+workerId.value="";
+workerName.value="";
+workerMobile.value="";
+workerWage.value="";
+
+}
+
+loadWorkers();
+
+</script>
+
+</body>
+</html>

@@ -2,180 +2,204 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crypto Dashboard</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AGR AI Workforce Suite v11</title>
 
 <style>
+:root{
+--blue:#0b2545;
+--gold:#d4af37;
+--bg:#f4f6f9;
+--white:#ffffff;
+}
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
 body{
-    background:#1ec7be;
+background:var(--bg);
 }
 
-.header{
-    display:flex;
-    align-items:center;
-    padding:20px;
-    color:white;
+header{
+background:var(--blue);
+color:#fff;
+padding:15px;
+text-align:center;
 }
 
-.logo{
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    background:#0a2b40;
+header h1{
+color:var(--gold);
 }
 
-.title{
-    font-size:38px;
-    font-weight:bold;
-    margin-left:15px;
+nav{
+background:#081b33;
+display:flex;
+overflow:auto;
 }
 
-.notice{
-    margin:15px;
-    padding:15px;
-    border:2px solid rgba(255,255,255,.5);
-    border-radius:30px;
-    color:white;
-    overflow:hidden;
+nav button{
+flex:1;
+padding:12px;
+border:none;
+background:none;
+color:white;
+cursor:pointer;
+min-width:120px;
 }
 
-.banner{
-    margin:15px;
+nav button:hover{
+background:var(--gold);
+color:black;
 }
 
-.banner img{
-    width:100%;
-    border-radius:20px;
+.container{
+padding:15px;
+max-width:1200px;
+margin:auto;
 }
 
-.menu-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    padding:15px;
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-top:15px;
 }
 
 .card{
-    background:rgba(255,255,255,.15);
-    border-radius:20px;
-    padding:20px;
-    text-align:center;
-    color:white;
-    backdrop-filter:blur(5px);
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 6px rgba(0,0,0,.1);
+text-align:center;
 }
 
-.card img{
-    width:60px;
-    margin-bottom:10px;
+.card h2{
+color:var(--blue);
+margin-bottom:10px;
 }
 
-.card h3{
-    font-size:18px;
+.card span{
+font-size:30px;
+font-weight:bold;
+color:var(--gold);
 }
 
-.app-banner{
-    margin:15px;
-    background:linear-gradient(90deg,#1a6fff,#67d9ff);
-    border-radius:20px;
-    padding:25px;
-    text-align:center;
-    color:white;
-    font-size:32px;
+.page{
+display:none;
 }
 
-.activities{
-    margin:15px;
-    background:white;
-    border-radius:20px;
-    min-height:150px;
-    padding:20px;
+.active{
+display:block;
 }
 
-.activities h2{
-    color:black;
-}
-
-.bottom-nav{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:#19bdb4;
-    display:flex;
-    justify-content:space-around;
-    padding:15px 0;
-    color:white;
-}
-
-.bottom-nav div{
-    text-align:center;
+footer{
+margin-top:20px;
+background:var(--blue);
+color:white;
+padding:10px;
+text-align:center;
 }
 </style>
 </head>
+
 <body>
 
-<div class="header">
-    <div class="logo"></div>
-    <div class="title">ETH</div>
+<header>
+<h1>AGR AI Workforce Suite v11</h1>
+<p>AGR & CO Construction ERP</p>
+</header>
+
+<nav>
+<button onclick="showPage('dashboard')">Dashboard</button>
+<button onclick="showPage('workers')">Workers</button>
+<button onclick="showPage('attendance')">Attendance</button>
+<button onclick="showPage('projects')">Projects</button>
+<button onclick="showPage('reports')">Reports</button>
+</nav>
+
+<div class="container">
+
+<!-- Dashboard -->
+<div id="dashboard" class="page active">
+
+<h2>Dashboard</h2>
+
+<div class="cards">
+
+<div class="card">
+<h2>Total Workers</h2>
+<span id="workersCount">0</span>
 </div>
 
-<div class="notice">
-    Mining address: https://example.com
+<div class="card">
+<h2>Present Today</h2>
+<span id="presentCount">0</span>
 </div>
 
-<div class="banner">
-    <img src="https://images.unsplash.com/photo-1639762681057-408e52192e55?w=1200" alt="">
+<div class="card">
+<h2>Absent Today</h2>
+<span id="absentCount">0</span>
 </div>
 
-<div class="menu-grid">
+<div class="card">
+<h2>Projects</h2>
+<span id="projectCount">0</span>
+</div>
 
-    <div class="card">
-        <h3>Recharge</h3>
-    </div>
-
-    <div class="card">
-        <h3>Withdraw</h3>
-    </div>
-
-    <div class="card">
-        <h3>Company Profile</h3>
-    </div>
-
-    <div class="card">
-        <h3>Invite Friends</h3>
-    </div>
-
-    <div class="card">
-        <h3>Agency</h3>
-    </div>
-
-    <div class="card">
-        <h3>Support</h3>
-    </div>
+<div class="card">
+<h2>Attendance %</h2>
+<span id="attendancePercent">0%</span>
+</div>
 
 </div>
 
-<div class="app-banner">
-    APP
 </div>
 
-<div class="activities">
-    <h2>Activities</h2>
+<!-- Workers -->
+<div id="workers" class="page">
+<h2>Workers Module</h2>
+<p>Part 2 will be added here.</p>
 </div>
 
-<div class="bottom-nav">
-    <div>🏠<br>Home</div>
-    <div>📊<br>Project</div>
-    <div>👥<br>Team</div>
-    <div>👤<br>Me</div>
+<!-- Attendance -->
+<div id="attendance" class="page">
+<h2>Attendance Module</h2>
+<p>Part 3 will be added here.</p>
 </div>
+
+<!-- Projects -->
+<div id="projects" class="page">
+<h2>Projects Module</h2>
+<p>Part 4 will be added here.</p>
+</div>
+
+<!-- Reports -->
+<div id="reports" class="page">
+<h2>Reports Module</h2>
+<p>Part 5 will be added here.</p>
+</div>
+
+</div>
+
+<footer>
+AGR & CO © 2026
+</footer>
+
+<script>
+function showPage(pageId){
+
+document.querySelectorAll('.page')
+.forEach(page=>page.classList.remove('active'));
+
+document.getElementById(pageId)
+.classList.add('active');
+
+}
+</script>
 
 </body>
 </html>
